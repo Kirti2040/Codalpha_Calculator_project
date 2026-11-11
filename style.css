@@ -1,0 +1,179 @@
+/* Layout: one centered calculator card, display on top, 4-column key grid below. Dark-first, light variant follows the device. */
+:root {
+  --bg: #0c0f12;
+  --body: #14191e;
+  --screen: #0c1013;
+  --line: #232c34;
+  --fg: #eaf0f3;
+  --muted: #8795a0;
+  --key: #1d252c;
+  --key-hover: #27323b;
+  --fn: #2a343d;
+  --fn-hover: #35424d;
+  --op: #12323a;
+  --op-hover: #19434d;
+  --op-fg: #5fe3d3;
+  --accent: #3dd6c6;
+  --accent-hover: #63e3d5;
+  --on-accent: #06201d;
+  --shadow: rgba(0, 0, 0, 0.5);
+  --font-display: "Space Grotesk", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+  color-scheme: dark;
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --bg: #eef2f5;
+    --body: #ffffff;
+    --screen: #f1f5f7;
+    --line: #d9e1e7;
+    --fg: #11191f;
+    --muted: #5c6b76;
+    --key: #f1f5f7;
+    --key-hover: #e5ebef;
+    --fn: #dfe7ec;
+    --fn-hover: #d2dce3;
+    --op: #d7efec;
+    --op-hover: #c5e6e2;
+    --op-fg: #0a6b62;
+    --accent: #0c8277;
+    --accent-hover: #0a6e64;
+    --on-accent: #ffffff;
+    --shadow: rgba(20, 40, 55, 0.18);
+    color-scheme: light;
+  }
+}
+:root[data-theme="light"] {
+  --bg: #eef2f5;
+  --body: #ffffff;
+  --screen: #f1f5f7;
+  --line: #d9e1e7;
+  --fg: #11191f;
+  --muted: #5c6b76;
+  --key: #f1f5f7;
+  --key-hover: #e5ebef;
+  --fn: #dfe7ec;
+  --fn-hover: #d2dce3;
+  --op: #d7efec;
+  --op-hover: #c5e6e2;
+  --op-fg: #0a6b62;
+  --accent: #0c8277;
+  --accent-hover: #0a6e64;
+  --on-accent: #ffffff;
+  --shadow: rgba(20, 40, 55, 0.18);
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  padding-block: 24px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+
+/* ---------- Calculator card ---------- */
+.calc {
+  width: min(100%, 360px);
+  background: var(--body);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  padding: 16px;
+  box-shadow: 0 24px 60px var(--shadow);
+}
+
+/* ---------- Display ---------- */
+.screen {
+  background: var(--screen);
+  border-radius: 16px;
+  padding: 14px 16px;
+  margin-bottom: 14px;
+  min-height: 112px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+  gap: 4px;
+  overflow: hidden;
+}
+.sub {
+  min-height: 1.4em;
+  max-width: 100%;
+  color: var(--muted);
+  font-size: 1rem;
+  font-variant-numeric: tabular-nums;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.main {
+  max-width: 100%;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 3rem;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  overflow-x: auto;
+  scrollbar-width: none;
+  transition: font-size 0.15s ease;
+}
+.main::-webkit-scrollbar { display: none; }
+
+/* ---------- Keys ---------- */
+.keys {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+.key {
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  font-weight: 500;
+  color: var(--fg);
+  background: var(--key);
+  border: 0;
+  border-radius: 16px;
+  aspect-ratio: 1.1;
+  min-width: 0;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.1s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.key:hover { background: var(--key-hover); }
+.key:active,
+.key.pressed { transform: scale(0.94); }
+.key:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.key.fn { background: var(--fn); font-size: 1.2rem; }
+.key.fn:hover { background: var(--fn-hover); }
+
+.key.op { background: var(--op); color: var(--op-fg); font-size: 1.7rem; }
+.key.op:hover { background: var(--op-hover); }
+
+.key.eq { background: var(--accent); color: var(--on-accent); font-size: 1.7rem; }
+.key.eq:hover { background: var(--accent-hover); }
+
+.hint {
+  margin: 14px 0 0;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.75rem;
+}
+
+@media (max-width: 380px) {
+  .calc { padding: 12px; border-radius: 20px; }
+  .keys { gap: 8px; }
+  .key { font-size: 1.3rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}

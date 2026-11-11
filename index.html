@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calculator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<main class="calc" aria-label="Calculator">
+  <div class="screen" aria-live="polite">
+    <div class="sub" id="sub"></div>
+    <div class="main" id="main">0</div>
+  </div>
+
+  <div class="keys" id="keys">
+    <button class="key fn"  data-key="AC"  aria-label="Clear all">AC</button>
+    <button class="key fn"  data-key="DEL" aria-label="Delete last digit">&#9003;</button>
+    <button class="key fn"  data-key="%"   aria-label="Percent">%</button>
+    <button class="key op"  data-key="÷"   aria-label="Divide">÷</button>
+
+    <button class="key" data-key="7">7</button>
+    <button class="key" data-key="8">8</button>
+    <button class="key" data-key="9">9</button>
+    <button class="key op"  data-key="×"   aria-label="Multiply">×</button>
+
+    <button class="key" data-key="4">4</button>
+    <button class="key" data-key="5">5</button>
+    <button class="key" data-key="6">6</button>
+    <button class="key op"  data-key="−"   aria-label="Subtract">−</button>
+
+    <button class="key" data-key="1">1</button>
+    <button class="key" data-key="2">2</button>
+    <button class="key" data-key="3">3</button>
+    <button class="key op"  data-key="+"   aria-label="Add">+</button>
+
+    <button class="key fn"  data-key="±"   aria-label="Change sign">±</button>
+    <button class="key" data-key="0">0</button>
+    <button class="key" data-key="."       aria-label="Decimal point">.</button>
+    <button class="key eq"  data-key="="   aria-label="Equals">=</button>
+  </div>
+
+  <p class="hint">Keyboard: 0–9 &nbsp;+ − × ÷ &nbsp;Enter&nbsp;=&nbsp; Backspace &nbsp;Esc&nbsp;clear</p>
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
